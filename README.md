@@ -1,6 +1,9 @@
 # giftwrap
 
+Giftwrap server for 'malicious' packages in pip, gems, npm
+
 This project was generated via [manage-fastapi](https://ycd.github.io/manage-fastapi/)! :tada:
+
 
 ## License
 
