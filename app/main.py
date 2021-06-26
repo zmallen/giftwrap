@@ -6,8 +6,28 @@ from fastapi.responses import HTMLResponse
 app = FastAPI()
 app.add_middleware(GZipMiddleware, minimum_size=10)
 
+paranoid = False
+
+class OctetStreamResponse(Response):
+    media_type = "application/octet-stream"
+
+#localhost:8000/packages/virtualenvwrapper-0.1.0.tar.gz/
+@app.get("/packages/{package}/", response_class=OctetStreamResponse)
+async def serve_package(package, response:Response):
+    package_path = 'app/packages/virtualenvwrapper-0.1.0.tar.gz'
+    data = None
+    import ipdb; ipdb.set_trace()
+    with open(package_path, 'rb') as fd:
+        data = fd.read()
+    return Response(
+        data,
+        media_type="application/octet-stream"
+    )
+
 @app.get("/simple/{package}/", response_class=HTMLResponse)
 async def pypi(package, request:Request, response:Response):
+#    if not paranoid:
+#        return 'http://localhost:8000/packages/virtualenvwrapper-0.1.0.tar.gz/'
     url = 'https://pypi.org/simple/%s/' % package
     r = requests.get(url)
     if r.ok:

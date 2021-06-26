@@ -21,10 +21,5 @@ def main():
             ],
         )
         result = cli.launch()
-        print("You chose:", result)
-        if result.startswith('1.'):
-            get_environment_config()
-        if result.startswith('5.'):
-            do_exit = True
-if __name__ == '__main__':
-    main()
+    :wqa
+
