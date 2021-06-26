@@ -19,3 +19,7 @@ async def pypi(package, request:Request, response:Response):
             if header_key not in dont_add_headers:
                 response.headers[header_key] = r.headers[header_key]
         return r.text
+
+@app.get("/api/v1/dependencies?gems={gems}", response_class=HTMLResponse)
+async def rubygems(gems, request:Request, response:Response):
+    return 'ok'
